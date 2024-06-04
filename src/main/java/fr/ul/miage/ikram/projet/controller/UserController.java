@@ -3,6 +3,7 @@ package fr.ul.miage.ikram.projet.controller;
 import fr.ul.miage.ikram.projet.model.User;
 import fr.ul.miage.ikram.projet.service.UserService;
 import fr.ul.miage.ikram.projet.util.InputHandler;
+import fr.ul.miage.ikram.projet.util.InputValidator;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
 import java.util.ArrayList;
@@ -26,6 +27,21 @@ public class UserController {
             String email = InputHandler.getString("Email: ");
             String debitCardNumber = InputHandler.getString("Debit Card Number: ");
             String licensePlate = InputHandler.getOptionalString("License Plate Number (optional, press Enter to skip): ");
+
+            if (!InputValidator.isNotEmpty(firstName) || !InputValidator.isNotEmpty(lastName) || !InputValidator.isNotEmpty(address) || !InputValidator.isNotEmpty(debitCardNumber)) {
+                OutputHandler.printError("All fields except license plate must be filled.");
+                return;
+            }
+
+            if (!InputValidator.isValidPhoneNumber(mobileNumber)) {
+                OutputHandler.printError("Invalid phone number. Please enter only digits.");
+                return;
+            }
+
+            if (!InputValidator.isValidEmail(email)) {
+                OutputHandler.printError("Invalid email format.");
+                return;
+            }
 
             List<String> licensePlates = new ArrayList<>();
             if (!licensePlate.isEmpty()) {
@@ -60,6 +76,11 @@ public class UserController {
             }
 
             String licensePlate = InputHandler.getString("License Plate Number: ");
+            if (!InputValidator.isNotEmpty(licensePlate)) {
+                OutputHandler.printError("License plate number cannot be empty.");
+                return;
+            }
+
             List<String> licensePlates = user.getLicensePlateNumbers();
             if (licensePlates == null) {
                 licensePlates = new ArrayList<>();
