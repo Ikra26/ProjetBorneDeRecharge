@@ -4,6 +4,10 @@ import fr.ul.miage.ikram.projet.dao.ChargingStationDAO;
 import fr.ul.miage.ikram.projet.model.ChargingStation;
 
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> origin/main
 import java.util.List;
 
 public class ChargingStationService {
@@ -42,6 +46,20 @@ public class ChargingStationService {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public List<ChargingStation> getAvailableChargingStations(LocalDateTime startTime, int durationHours) {
+        try {
+            return chargingStationDAO.getAvailableChargingStations(startTime, durationHours);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exception appropriately
+            return null;
+        }
+    }
+
+
+>>>>>>> origin/main
     public void updateChargingStation(ChargingStation station) {
         try {
             chargingStationDAO.updateChargingStation(station);

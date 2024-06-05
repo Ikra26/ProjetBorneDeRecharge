@@ -10,6 +10,7 @@ import java.util.List;
 public class ReservationDAO {
 
     public void createReservation(Reservation reservation) throws SQLException {
+<<<<<<< HEAD
         String query = "INSERT INTO reservations (user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConfig.getConnection();
@@ -35,10 +36,14 @@ public class ReservationDAO {
     public Reservation getReservationById(int id) throws SQLException {
         String query = "SELECT * FROM reservations WHERE id = ?";
         Reservation reservation = null;
+=======
+        String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+>>>>>>> origin/main
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+<<<<<<< HEAD
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -57,6 +62,24 @@ public class ReservationDAO {
         }
 
         return reservation;
+=======
+            preparedStatement.setString(1, reservation.getId());
+            preparedStatement.setString(2, reservation.getUserId());
+            preparedStatement.setInt(3, reservation.getStationId());
+            preparedStatement.setString(4, reservation.getLicensePlateNumber());
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(reservation.getStartTime()));
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(reservation.getEndTime()));
+            preparedStatement.setBoolean(7, reservation.isGuaranteed());
+            preparedStatement.setBoolean(8, reservation.isCompleted());
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public Reservation getReservationById(String id) throws SQLException {
+        String query = "SELECT * FROM reservations WHERE id = ?";
+        return getReservationDetails(query, id);
+>>>>>>> origin/main
     }
 
     public List<Reservation> getAllReservations() throws SQLException {
@@ -68,6 +91,7 @@ public class ReservationDAO {
              ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
+<<<<<<< HEAD
                 Reservation reservation = new Reservation();
                 reservation.setId(resultSet.getInt("id"));
                 reservation.setUserId(resultSet.getInt("user_id"));
@@ -78,6 +102,9 @@ public class ReservationDAO {
                 reservation.setGuaranteed(resultSet.getBoolean("is_guaranteed"));
                 reservation.setCompleted(resultSet.getBoolean("is_completed"));
                 reservations.add(reservation);
+=======
+                reservations.add(extractReservationFromResultSet(resultSet));
+>>>>>>> origin/main
             }
         }
 
@@ -90,29 +117,97 @@ public class ReservationDAO {
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+<<<<<<< HEAD
             preparedStatement.setInt(1, reservation.getUserId());
+=======
+            preparedStatement.setString(1, reservation.getUserId());
+>>>>>>> origin/main
             preparedStatement.setInt(2, reservation.getStationId());
             preparedStatement.setString(3, reservation.getLicensePlateNumber());
             preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getStartTime()));
             preparedStatement.setTimestamp(5, Timestamp.valueOf(reservation.getEndTime()));
             preparedStatement.setBoolean(6, reservation.isGuaranteed());
             preparedStatement.setBoolean(7, reservation.isCompleted());
+<<<<<<< HEAD
             preparedStatement.setInt(8, reservation.getId());
+=======
+            preparedStatement.setString(8, reservation.getId());
+>>>>>>> origin/main
 
             preparedStatement.executeUpdate();
         }
     }
 
+<<<<<<< HEAD
     public void deleteReservation(int id) throws SQLException {
+=======
+    public void deleteReservation(String id) throws SQLException {
+>>>>>>> origin/main
         String query = "DELETE FROM reservations WHERE id = ?";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+<<<<<<< HEAD
             preparedStatement.setInt(1, id);
+=======
+            preparedStatement.setString(1, id);
+>>>>>>> origin/main
 
             preparedStatement.executeUpdate();
         }
     }
+<<<<<<< HEAD
 }
 
+=======
+
+    private Reservation getReservationDetails(String query, String parameter) throws SQLException {
+        Reservation reservation = null;
+
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, parameter);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    reservation = extractReservationFromResultSet(resultSet);
+                }
+            }
+        }
+
+        return reservation;
+    }
+
+    private Reservation extractReservationFromResultSet(ResultSet resultSet) throws SQLException {
+        Reservation reservation = new Reservation();
+        reservation.setId(resultSet.getString("id"));
+        reservation.setUserId(resultSet.getString("user_id"));
+        reservation.setStationId(resultSet.getInt("station_id"));
+        reservation.setLicensePlateNumber(resultSet.getString("plate_number"));
+        reservation.setStartTime(resultSet.getTimestamp("start_time").toLocalDateTime());
+        reservation.setEndTime(resultSet.getTimestamp("end_time").toLocalDateTime());
+        reservation.setGuaranteed(resultSet.getBoolean("is_guaranteed"));
+        reservation.setCompleted(resultSet.getBoolean("is_completed"));
+        return reservation;
+    }
+
+    public boolean existsById(String id) throws SQLException {
+        String query = "SELECT COUNT(*) FROM reservations WHERE id = ?";
+
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+                return false;
+            }
+        }
+    }
+}
+>>>>>>> origin/main

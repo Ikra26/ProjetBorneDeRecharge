@@ -3,7 +3,11 @@ package fr.ul.miage.ikram.projet.model;
 import java.util.List;
 
 public class User {
+<<<<<<< HEAD
     private int id;
+=======
+    private String id;
+>>>>>>> origin/main
     private String firstName;
     private String lastName;
     private String address;
@@ -15,7 +19,11 @@ public class User {
     // Constructors
     public User() {}
 
+<<<<<<< HEAD
     public User(int id, String firstName, String lastName, String address, String mobileNumber, String email, String debitCardNumber, List<String> licensePlateNumbers) {
+=======
+    public User(String id, String firstName, String lastName, String address, String mobileNumber, String email, String debitCardNumber, List<String> licensePlateNumbers) {
+>>>>>>> origin/main
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,11 +35,19 @@ public class User {
     }
 
     // Getters and Setters
+<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+=======
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+>>>>>>> origin/main
         this.id = id;
     }
 
@@ -95,7 +111,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
+<<<<<<< HEAD
                 "id=" + id +
+=======
+                "id='" + id + '\'' +
+>>>>>>> origin/main
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
@@ -106,4 +126,7 @@ public class User {
                 '}';
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main

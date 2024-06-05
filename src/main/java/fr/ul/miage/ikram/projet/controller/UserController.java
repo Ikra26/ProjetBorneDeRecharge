@@ -68,7 +68,11 @@ public class UserController {
         try {
             OutputHandler.printInfo("Add License Plate to an Existing Client");
 
+<<<<<<< HEAD
             int clientId = InputHandler.getInt("Client ID: ");
+=======
+            String clientId = InputHandler.getString("Client ID: ");
+>>>>>>> origin/main
             User user = userService.getUserById(clientId);
             if (user == null) {
                 OutputHandler.printError("Client not found.");
