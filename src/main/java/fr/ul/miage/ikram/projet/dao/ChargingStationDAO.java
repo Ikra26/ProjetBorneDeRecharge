@@ -5,10 +5,7 @@ import fr.ul.miage.ikram.projet.model.ChargingStation;
 import fr.ul.miage.ikram.projet.model.Status;
 
 import java.sql.*;
-<<<<<<< HEAD
-=======
 import java.time.LocalDateTime;
->>>>>>> origin/main
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +71,6 @@ public class ChargingStationDAO {
         return stations;
     }
 
-<<<<<<< HEAD
-=======
     public List<ChargingStation> getAvailableChargingStations(LocalDateTime startTime, int durationHours) throws SQLException {
         String query = "SELECT * FROM charging_stations WHERE id NOT IN " +
                 "(SELECT station_id FROM reservations WHERE (start_time < ? AND end_time > ?) " +
@@ -110,7 +105,6 @@ public class ChargingStationDAO {
     }
 
 
->>>>>>> origin/main
     public void updateChargingStation(ChargingStation station) throws SQLException {
         String query = "UPDATE charging_stations SET location = ?, status = ? WHERE id = ?";
 

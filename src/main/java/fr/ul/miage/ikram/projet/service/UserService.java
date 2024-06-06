@@ -15,36 +15,22 @@ public class UserService {
 
     public void registerUser(User user) {
         try {
-<<<<<<< HEAD
-            userDAO.createUser(user);
-=======
             userDAO.registerUser(user);
->>>>>>> origin/main
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle exception appropriately
         }
     }
 
-<<<<<<< HEAD
-    public User getUserById(int id) {
-=======
     public User getUserById(String id) {
->>>>>>> origin/main
         try {
             return userDAO.getUserById(id);
         } catch (SQLException e) {
             e.printStackTrace();
-<<<<<<< HEAD
-            // Handle exception appropriately
-=======
->>>>>>> origin/main
             return null;
         }
     }
 
-<<<<<<< HEAD
-=======
     public User getUserByMobileNumber(String mobileNumber) {
         try {
             return userDAO.getUserByMobileNumber(mobileNumber);
@@ -55,16 +41,11 @@ public class UserService {
     }
 
 
->>>>>>> origin/main
     public List<User> getAllUsers() {
         try {
             return userDAO.getAllUsers();
         } catch (SQLException e) {
             e.printStackTrace();
-<<<<<<< HEAD
-            // Handle exception appropriately
-=======
->>>>>>> origin/main
             return null;
         }
     }
@@ -74,26 +55,14 @@ public class UserService {
             userDAO.updateUser(user);
         } catch (SQLException e) {
             e.printStackTrace();
-<<<<<<< HEAD
-            // Handle exception appropriately
-        }
-    }
-
-    public void deleteUser(int id) {
-=======
         }
     }
 
     public void deleteUser(String id) {
->>>>>>> origin/main
         try {
             userDAO.deleteUser(id);
         } catch (SQLException e) {
             e.printStackTrace();
-<<<<<<< HEAD
-            // Handle exception appropriately
-=======
->>>>>>> origin/main
         }
     }
 }
