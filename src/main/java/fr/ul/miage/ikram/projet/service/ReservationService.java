@@ -25,7 +25,6 @@ public class ReservationService {
             reservationDAO.createReservation(reservation);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 
@@ -34,7 +33,15 @@ public class ReservationService {
             return reservationDAO.getReservationById(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
+            return null;
+        }
+    }
+
+    public List<Reservation> getReservationsByUserIdAndMonth(String userId, int month, int year) {
+        try {
+            return reservationDAO.getReservationsByUserIdAndMonth(userId, month, year);
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -44,7 +51,6 @@ public class ReservationService {
             return reservationDAO.getAllReservations();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
             return null;
         }
     }
@@ -54,7 +60,6 @@ public class ReservationService {
             reservationDAO.updateReservation(reservation);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 
@@ -63,7 +68,6 @@ public class ReservationService {
             reservationDAO.deleteReservation(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 }

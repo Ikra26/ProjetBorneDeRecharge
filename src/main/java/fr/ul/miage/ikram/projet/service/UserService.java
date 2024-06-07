@@ -18,7 +18,6 @@ public class UserService {
             userDAO.registerUser(user);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 

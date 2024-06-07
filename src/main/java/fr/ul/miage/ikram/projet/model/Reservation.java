@@ -1,6 +1,7 @@
 package fr.ul.miage.ikram.projet.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Reservation {
     private String id;
@@ -13,19 +14,12 @@ public class Reservation {
     private boolean isCompleted;
     private boolean isArrived;
     private boolean isPaid;
-<<<<<<< HEAD
     private int extensionCount;
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
     // Constructors
     public Reservation() {}
 
-<<<<<<< HEAD
     public Reservation(String id, String userId, int stationId, String licensePlateNumber, LocalDateTime startTime, LocalDateTime endTime, boolean isGuaranteed, boolean isCompleted, boolean isArrived, boolean isPaid, int extensionCount) {
-=======
-    public Reservation(String id, String userId, int stationId, String licensePlateNumber, LocalDateTime startTime, LocalDateTime endTime, boolean isGuaranteed, boolean isCompleted, boolean isArrived, boolean isPaid) {
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
         this.id = id;
         this.userId = userId;
         this.stationId = stationId;
@@ -36,10 +30,7 @@ public class Reservation {
         this.isCompleted = isCompleted;
         this.isArrived = isArrived;
         this.isPaid = isPaid;
-<<<<<<< HEAD
         this.extensionCount = extensionCount;
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
     }
 
     // Getters and Setters
@@ -107,23 +98,22 @@ public class Reservation {
         this.isCompleted = isCompleted;
     }
 
-    public void setArrived(boolean arrived) {
-        isArrived = arrived;
-    }
-
     public boolean isArrived() {
         return isArrived;
     }
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
+    public void setArrived(boolean arrived) {
+        isArrived = arrived;
     }
 
     public boolean isPaid() {
         return isPaid;
     }
 
-<<<<<<< HEAD
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
     public int getExtensionCount() {
         return extensionCount;
     }
@@ -132,8 +122,14 @@ public class Reservation {
         this.extensionCount = extensionCount;
     }
 
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
+    public long getDuration() {
+        return ChronoUnit.HOURS.between(startTime, endTime);
+    }
+
+    public boolean isPenaltyApplicable() {
+        return !isArrived || !isCompleted;
+    }
+
     // toString method
     @Override
     public String toString() {
@@ -148,10 +144,7 @@ public class Reservation {
                 ", isCompleted=" + isCompleted +
                 ", isArrived=" + isArrived +
                 ", isPaid=" + isPaid +
-<<<<<<< HEAD
                 ", extensionCount=" + extensionCount +
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
                 '}';
     }
 }

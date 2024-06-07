@@ -19,7 +19,6 @@ public class ChargingStationService {
             chargingStationDAO.createChargingStation(station);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 
@@ -28,7 +27,6 @@ public class ChargingStationService {
             return chargingStationDAO.getChargingStationById(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
             return null;
         }
     }
@@ -38,7 +36,6 @@ public class ChargingStationService {
             return chargingStationDAO.getAllChargingStations();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
             return null;
         }
     }
@@ -48,7 +45,6 @@ public class ChargingStationService {
             return chargingStationDAO.getAvailableChargingStations(startTime, durationHours);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
             return null;
         }
     }
@@ -59,7 +55,6 @@ public class ChargingStationService {
             chargingStationDAO.updateChargingStation(station);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 
@@ -68,7 +63,6 @@ public class ChargingStationService {
             chargingStationDAO.deleteChargingStation(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception appropriately
         }
     }
 }

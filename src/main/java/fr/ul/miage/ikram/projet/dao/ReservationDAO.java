@@ -4,17 +4,14 @@ import fr.ul.miage.ikram.projet.config.DatabaseConfig;
 import fr.ul.miage.ikram.projet.model.Reservation;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDAO {
 
     public void createReservation(Reservation reservation) throws SQLException {
-<<<<<<< HEAD
         String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed, is_arrived, is_paid, extension_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-=======
-        String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed, is_arrived, is_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -29,10 +26,7 @@ public class ReservationDAO {
             preparedStatement.setBoolean(8, reservation.isCompleted());
             preparedStatement.setBoolean(9, reservation.isArrived());
             preparedStatement.setBoolean(10, reservation.isPaid());
-<<<<<<< HEAD
             preparedStatement.setInt(11, reservation.getExtensionCount());
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
             preparedStatement.executeUpdate();
         }
@@ -41,6 +35,27 @@ public class ReservationDAO {
     public Reservation getReservationById(String id) throws SQLException {
         String query = "SELECT * FROM reservations WHERE id = ?";
         return getReservationDetails(query, id);
+    }
+
+    public List<Reservation> getReservationsByUserIdAndMonth(String userId, int month, int year) throws SQLException {
+        String query = "SELECT * FROM reservations WHERE user_id = ? AND MONTH(start_time) = ? AND YEAR(start_time) = ?";
+        List<Reservation> reservations = new ArrayList<>();
+
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setInt(2, month);
+            preparedStatement.setInt(3, year);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    reservations.add(extractReservationFromResultSet(resultSet));
+                }
+            }
+        }
+
+        return reservations;
     }
 
     public List<Reservation> getAllReservations() throws SQLException {
@@ -60,11 +75,7 @@ public class ReservationDAO {
     }
 
     public void updateReservation(Reservation reservation) throws SQLException {
-<<<<<<< HEAD
         String query = "UPDATE reservations SET user_id = ?, station_id = ?, plate_number = ?, start_time = ?, end_time = ?, is_guaranteed = ?, is_completed = ?, is_arrived = ?, is_paid = ?, extension_count = ? WHERE id = ?";
-=======
-        String query = "UPDATE reservations SET user_id = ?, station_id = ?, plate_number = ?, start_time = ?, end_time = ?, is_guaranteed = ?, is_completed = ?, is_arrived = ?, is_paid = ? WHERE id = ?";
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -78,12 +89,8 @@ public class ReservationDAO {
             preparedStatement.setBoolean(7, reservation.isCompleted());
             preparedStatement.setBoolean(8, reservation.isArrived());
             preparedStatement.setBoolean(9, reservation.isPaid());
-<<<<<<< HEAD
             preparedStatement.setInt(10, reservation.getExtensionCount());
             preparedStatement.setString(11, reservation.getId());
-=======
-            preparedStatement.setString(10, reservation.getId());
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
             preparedStatement.executeUpdate();
         }
@@ -131,10 +138,7 @@ public class ReservationDAO {
         reservation.setCompleted(resultSet.getBoolean("is_completed"));
         reservation.setPaid(resultSet.getBoolean("is_paid"));
         reservation.setArrived(resultSet.getBoolean("is_arrived"));
-<<<<<<< HEAD
         reservation.setExtensionCount(resultSet.getInt("extension_count"));
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
         return reservation;
     }
 

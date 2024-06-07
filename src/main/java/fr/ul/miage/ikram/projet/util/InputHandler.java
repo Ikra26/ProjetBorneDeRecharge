@@ -38,6 +38,22 @@ public class InputHandler {
         return number;
     }
 
+    public static double getDouble(String prompt) {
+        double number;
+        while (true) {
+            try {
+                System.out.print(prompt);
+                number = Double.parseDouble(scanner.nextLine().trim());
+                break;
+            } catch (NumberFormatException e) {
+                OutputHandler.printError("Invalid input. Please enter a valid double.");
+            } catch (Exception e) {
+                OutputHandler.printError("Error reading input: " + e.getMessage());
+            }
+        }
+        return number;
+    }
+
     public static String getOptionalString(String prompt) {
         try {
             System.out.print(prompt);

@@ -3,6 +3,8 @@ package fr.ul.miage.ikram.projet.app;
 import fr.ul.miage.ikram.projet.controller.UserController;
 import fr.ul.miage.ikram.projet.controller.ChargingStationController;
 import fr.ul.miage.ikram.projet.controller.ReservationController;
+import fr.ul.miage.ikram.projet.controller.BillingController;
+import fr.ul.miage.ikram.projet.controller.FeesController;
 import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
@@ -10,6 +12,8 @@ public class ChargingStationApp {
     private static final UserController userController = new UserController();
     private static final ChargingStationController chargingStationController = new ChargingStationController();
     private static final ReservationController reservationController = new ReservationController();
+    private static final BillingController billingController = new BillingController();
+    private static final FeesController feesController = new FeesController();
 
     public static void main(String[] args) {
         boolean exit = false;
@@ -23,12 +27,10 @@ public class ChargingStationApp {
             System.out.println("5. Créer une réservation urgente");
             System.out.println("6. Marquer l'arrivée");
             System.out.println("7. Prolonger une réservation");
-<<<<<<< HEAD
             System.out.println("8. Modifier une réservation");
-            System.out.println("9. Quitter");
-=======
-            System.out.println("8. Quitter");
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
+            System.out.println("9. Générer une facture mensuelle");
+            System.out.println("10. Mettre à jour un montant de frais");
+            System.out.println("11. Quitter");
             int option = InputHandler.getInt("Veuillez choisir une option : ");
 
             switch (option) {
@@ -54,12 +56,15 @@ public class ChargingStationApp {
                     reservationController.extendReservation();
                     break;
                 case 8:
-<<<<<<< HEAD
                     reservationController.modifyReservation();
                     break;
                 case 9:
-=======
->>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
+                    billingController.generateMonthlyBill();
+                    break;
+                case 10:
+                    feesController.updateFeeAmount();
+                    break;
+                case 11:
                     exit = true;
                     OutputHandler.printInfo("Fermeture du système...");
                     break;
