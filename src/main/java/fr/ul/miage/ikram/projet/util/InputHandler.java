@@ -2,6 +2,9 @@ package fr.ul.miage.ikram.projet.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -77,6 +80,24 @@ public class InputHandler {
             }
         }
         return date;
+    }
+
+    public static LocalDateTime getDateTime(String prompt) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = null;
+        while (true) {
+            try {
+                System.out.print(prompt);
+                String input = scanner.nextLine().trim();
+                dateTime = LocalDateTime.parse(input, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                OutputHandler.printError("Invalid date-time format. Please enter the date and time in yyyy-MM-dd HH:mm format.");
+            } catch (Exception e) {
+                OutputHandler.printError("Error reading input: " + e.getMessage());
+            }
+        }
+        return dateTime;
     }
 
     public static void closeScanner() {

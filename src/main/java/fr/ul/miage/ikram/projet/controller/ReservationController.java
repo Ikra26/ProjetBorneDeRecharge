@@ -38,7 +38,10 @@ public class ReservationController {
             String licensePlateNumber = InputHandler.getString("Numéro de plaque d'immatriculation : ");
             if (!user.getLicensePlateNumbers().contains(licensePlateNumber)) {
                 OutputHandler.printError("Numéro de plaque d'immatriculation non trouvé pour ce client.");
+<<<<<<< HEAD
+=======
 //                return;
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
             }
 
             LocalDateTime startTime = LocalDateTime.now();
@@ -74,6 +77,10 @@ public class ReservationController {
             reservation.setCompleted(false);
             reservation.setPaid(false);
             reservation.setArrived(false);
+<<<<<<< HEAD
+            reservation.setExtensionCount(0);
+=======
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
             reservationService.createReservation(reservation);
             OutputHandler.printSuccess("Réservation créée avec succès ! Numéro de réservation : " + reservation.getId());
@@ -97,7 +104,10 @@ public class ReservationController {
 
             if (!user.getLicensePlateNumbers().contains(licensePlateNumber)) {
                 OutputHandler.printError("Numéro de plaque d'immatriculation non trouvé pour ce client.");
+<<<<<<< HEAD
+=======
 //                return;
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
             }
 
             LocalDateTime startTime = LocalDateTime.now();
@@ -132,6 +142,10 @@ public class ReservationController {
             reservation.setCompleted(false);
             reservation.setPaid(false);
             reservation.setArrived(false);
+<<<<<<< HEAD
+            reservation.setExtensionCount(0);
+=======
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
             reservationService.createReservation(reservation);
             OutputHandler.printSuccess("Réservation urgente créée avec succès ! Numéro de réservation : " + reservation.getId());
@@ -177,6 +191,14 @@ public class ReservationController {
                 return;
             }
 
+<<<<<<< HEAD
+            if (reservation.getExtensionCount() >= 3) {
+                OutputHandler.printError("La réservation ne peut pas être prolongée plus de 3 fois.");
+                return;
+            }
+
+=======
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
             int additionalHours = InputHandler.getInt("Durée supplémentaire en heures : ");
             LocalDateTime newEndTime = reservation.getEndTime().plusHours(additionalHours);
 
@@ -187,6 +209,10 @@ public class ReservationController {
             }
 
             reservation.setEndTime(newEndTime);
+<<<<<<< HEAD
+            reservation.setExtensionCount(reservation.getExtensionCount() + 1);
+=======
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
             reservationService.updateReservation(reservation);
             OutputHandler.printSuccess("Réservation prolongée avec succès.");
         } catch (Exception e) {
@@ -194,6 +220,56 @@ public class ReservationController {
         }
     }
 
+<<<<<<< HEAD
+    public void modifyReservation() {
+        try {
+            String reservationId = InputHandler.getString("Numéro de réservation : ");
+            Reservation reservation = reservationService.getReservationById(reservationId);
+
+            if (reservation == null) {
+                OutputHandler.printError("Réservation non trouvée.");
+                return;
+            }
+
+            LocalDateTime currentTime = LocalDateTime.now();
+            if (currentTime.isAfter(reservation.getStartTime())) {
+                OutputHandler.printError("Vous ne pouvez pas modifier une réservation après son heure de début.");
+                return;
+            }
+
+            int newDuration = InputHandler.getInt("Nouvelle durée de la réservation en heures : ");
+            LocalDateTime newStartTime = InputHandler.getDateTime("Nouvelle date de début de la réservation (yyyy-MM-dd HH:mm) : ");
+            LocalDateTime newEndTime = newStartTime.plusHours(newDuration);
+
+            List<ChargingStation> availableStations = chargingStationService.getAvailableChargingStations(newStartTime, newDuration);
+            if (availableStations.isEmpty()) {
+                OutputHandler.printError("Aucune borne disponible pour le nouvel intervalle.");
+                return;
+            }
+
+            OutputHandler.printInfo("Bornes disponibles : ");
+            for (ChargingStation station : availableStations) {
+                System.out.println("Borne ID: " + station.getId() + ", Emplacement: " + station.getLocation());
+            }
+
+            int stationId = InputHandler.getInt("Choisissez l'ID de la borne : ");
+            Optional<ChargingStation> optionalStation = availableStations.stream().filter(station -> station.getId() == stationId).findFirst();
+            if (!optionalStation.isPresent()) {
+                OutputHandler.printError("Borne non trouvée.");
+                return;
+            }
+
+            reservation.setStartTime(newStartTime);
+            reservation.setEndTime(newEndTime);
+            reservation.setStationId(stationId);
+            reservationService.updateReservation(reservation);
+            OutputHandler.printSuccess("Réservation modifiée avec succès.");
+        } catch (Exception e) {
+            OutputHandler.printError("Une erreur s'est produite lors de la modification de la réservation : " + e.getMessage());
+        }
+    }
+=======
+>>>>>>> f670ef088bc48d8cbdc0ea93e49d2f7305c0d968
 
     private User getUserByIdentifier(String identifier) {
         User user = userService.getUserById(identifier);

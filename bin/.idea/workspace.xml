@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="46b86ca7-3be7-438d-97ab-8cf49c9beb7d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/app/ChargingStationApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/app/ChargingStationApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/controller/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/dao/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/dao/ReservationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/model/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/util/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/ul/miage/ikram/projet/util/InputHandler.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2hNNtxKUxMfep3mySFSOJIbLgF7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ChargingStationApp.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputHandlerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputHandlerTest.testGetDateInvalid.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.InputHandlerTest.testGetDateInvalidThenValid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputHandlerTest.testGetDateValid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputHandlerTest.testGetIntInvalidThenValid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputHandlerTest.testGetIntValid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InputValidatorTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/JAVA Projects/GL_MIAGE_PROJET_2024_Maven/src/main/java/fr/ul/miage/ikram/projet&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\JAVA Projects\GL_MIAGE_PROJET_2024_Maven\src\main\java\fr\ul\miage\ikram\projet" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ChargingStationApp">
+    <configuration name="ChargingStationApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.ul.miage.ikram.projet.app.ChargingStationApp" />
+      <module name="GL_MIAGE_PROJET_2024_Maven" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.ul.miage.ikram.projet.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputHandlerTest.testGetDateInvalidThenValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GL_MIAGE_PROJET_2024_Maven" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InputHandlerTest" />
+      <option name="METHOD_NAME" value="testGetDateInvalidThenValid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputHandlerTest.testGetDateValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GL_MIAGE_PROJET_2024_Maven" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InputHandlerTest" />
+      <option name="METHOD_NAME" value="testGetDateValid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputHandlerTest.testGetIntInvalidThenValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GL_MIAGE_PROJET_2024_Maven" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InputHandlerTest" />
+      <option name="METHOD_NAME" value="testGetIntInvalidThenValid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputHandlerTest.testGetIntValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GL_MIAGE_PROJET_2024_Maven" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InputHandlerTest" />
+      <option name="METHOD_NAME" value="testGetIntValid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ChargingStationApp" />
+        <item itemvalue="JUnit.InputHandlerTest.testGetIntInvalidThenValid" />
+        <item itemvalue="JUnit.InputHandlerTest.testGetIntValid" />
+        <item itemvalue="JUnit.InputHandlerTest.testGetDateInvalidThenValid" />
+        <item itemvalue="JUnit.InputHandlerTest.testGetDateValid" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="46b86ca7-3be7-438d-97ab-8cf49c9beb7d" name="Changes" comment="" />
+      <created>1717430696479</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717430696479</updated>
+    </task>
+    <servers />
+  </component>
+</project>
