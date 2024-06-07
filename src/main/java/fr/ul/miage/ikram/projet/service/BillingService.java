@@ -5,13 +5,14 @@ import fr.ul.miage.ikram.projet.model.Reservation;
 import fr.ul.miage.ikram.projet.model.User;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class BillingService {
     private final FeesService feesService;
     private final ReservationService reservationService;
 
-    public BillingService() {
+    public BillingService() throws SQLException {
         this.feesService = new FeesService();
         this.reservationService = new ReservationService();
     }

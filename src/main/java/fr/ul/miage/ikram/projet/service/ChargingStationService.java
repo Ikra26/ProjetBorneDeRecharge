@@ -10,7 +10,7 @@ import java.util.List;
 public class ChargingStationService {
     private final ChargingStationDAO chargingStationDAO;
 
-    public ChargingStationService() {
+    public ChargingStationService() throws SQLException {
         this.chargingStationDAO = new ChargingStationDAO();
     }
 

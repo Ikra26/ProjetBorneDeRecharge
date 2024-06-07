@@ -11,11 +11,20 @@ import java.util.List;
 
 public class ChargingStationDAO {
 
+    private final Connection connection;
+
+    public ChargingStationDAO() throws SQLException {
+        this.connection = DatabaseConfig.getConnection(true);
+    }
+
+    public ChargingStationDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     public void createChargingStation(ChargingStation station) throws SQLException {
         String query = "INSERT INTO charging_stations (location, status) VALUES (?, ?)";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, station.getLocation());
             preparedStatement.setString(2, station.getStatus().name());
@@ -33,8 +42,7 @@ public class ChargingStationDAO {
         String query = "SELECT * FROM charging_stations WHERE id = ?";
         ChargingStation station = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, id);
 
@@ -55,8 +63,7 @@ public class ChargingStationDAO {
         String query = "SELECT * FROM charging_stations";
         List<ChargingStation> stations = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
@@ -78,8 +85,7 @@ public class ChargingStationDAO {
                 "OR (start_time >= ? AND start_time < ?))";
         List<ChargingStation> availableStations = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             LocalDateTime endTime = startTime.plusHours(durationHours);
 
@@ -108,8 +114,7 @@ public class ChargingStationDAO {
     public void updateChargingStation(ChargingStation station) throws SQLException {
         String query = "UPDATE charging_stations SET location = ?, status = ? WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, station.getLocation());
             preparedStatement.setString(2, station.getStatus().name());
@@ -122,8 +127,7 @@ public class ChargingStationDAO {
     public void deleteChargingStation(int id) throws SQLException {
         String query = "DELETE FROM charging_stations WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, id);
 

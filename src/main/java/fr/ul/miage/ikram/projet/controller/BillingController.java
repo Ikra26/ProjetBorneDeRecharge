@@ -6,11 +6,13 @@ import fr.ul.miage.ikram.projet.service.UserService;
 import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
+
 public class BillingController {
     private final BillingService billingService;
     private final UserService userService;
 
-    public BillingController() {
+    public BillingController() throws SQLException {
         this.billingService = new BillingService();
         this.userService = new UserService();
     }

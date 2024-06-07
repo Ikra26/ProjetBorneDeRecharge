@@ -9,6 +9,7 @@ import fr.ul.miage.ikram.projet.service.UserService;
 import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class ReservationController {
     private final ChargingStationService chargingStationService;
     private final UserService userService;
 
-    public ReservationController() {
+    public ReservationController() throws SQLException {
         this.reservationService = new ReservationService();
         this.chargingStationService = new ChargingStationService();
         this.userService = new UserService();

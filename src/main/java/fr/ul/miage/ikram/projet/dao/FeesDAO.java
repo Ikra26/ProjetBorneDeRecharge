@@ -12,12 +12,21 @@ import java.util.List;
 
 public class FeesDAO {
 
+    private final Connection connection;
+
+    public FeesDAO() throws SQLException {
+        this.connection = DatabaseConfig.getConnection(true);
+    }
+
+    public FeesDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     public Fees getFeesByName(String name) throws SQLException {
         String query = "SELECT * FROM fees WHERE name = ?";
         Fees fees = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, name);
 
@@ -37,8 +46,7 @@ public class FeesDAO {
     public void updateFees(Fees fees) throws SQLException {
         String query = "UPDATE fees SET amount = ? WHERE name = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setDouble(1, fees.getAmount());
             preparedStatement.setString(2, fees.getName());
@@ -51,8 +59,7 @@ public class FeesDAO {
         String query = "SELECT * FROM fees";
         List<Fees> feesList = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {

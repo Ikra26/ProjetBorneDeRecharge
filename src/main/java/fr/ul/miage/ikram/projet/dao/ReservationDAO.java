@@ -10,11 +10,20 @@ import java.util.List;
 
 public class ReservationDAO {
 
+    private final Connection connection;
+
+    public ReservationDAO() throws SQLException {
+        this.connection = DatabaseConfig.getConnection(true);
+    }
+
+    public ReservationDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     public void createReservation(Reservation reservation) throws SQLException {
         String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed, is_arrived, is_paid, extension_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, reservation.getId());
             preparedStatement.setString(2, reservation.getUserId());
@@ -41,8 +50,7 @@ public class ReservationDAO {
         String query = "SELECT * FROM reservations WHERE user_id = ? AND MONTH(start_time) = ? AND YEAR(start_time) = ?";
         List<Reservation> reservations = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userId);
             preparedStatement.setInt(2, month);
@@ -62,8 +70,7 @@ public class ReservationDAO {
         String query = "SELECT * FROM reservations";
         List<Reservation> reservations = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
@@ -77,8 +84,7 @@ public class ReservationDAO {
     public void updateReservation(Reservation reservation) throws SQLException {
         String query = "UPDATE reservations SET user_id = ?, station_id = ?, plate_number = ?, start_time = ?, end_time = ?, is_guaranteed = ?, is_completed = ?, is_arrived = ?, is_paid = ?, extension_count = ? WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, reservation.getUserId());
             preparedStatement.setInt(2, reservation.getStationId());
@@ -99,8 +105,7 @@ public class ReservationDAO {
     public void deleteReservation(String id) throws SQLException {
         String query = "DELETE FROM reservations WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, id);
 
@@ -111,8 +116,7 @@ public class ReservationDAO {
     private Reservation getReservationDetails(String query, String parameter) throws SQLException {
         Reservation reservation = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, parameter);
 
@@ -145,8 +149,7 @@ public class ReservationDAO {
     public boolean existsById(String id) throws SQLException {
         String query = "SELECT COUNT(*) FROM reservations WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, id);
 

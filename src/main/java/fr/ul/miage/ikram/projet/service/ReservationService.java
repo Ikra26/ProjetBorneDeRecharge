@@ -10,7 +10,7 @@ import java.util.List;
 public class ReservationService {
     private final ReservationDAO reservationDAO;
 
-    public ReservationService() {
+    public ReservationService() throws SQLException {
         this.reservationDAO = new ReservationDAO();
     }
 

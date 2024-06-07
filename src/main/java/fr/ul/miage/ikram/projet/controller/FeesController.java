@@ -5,12 +5,13 @@ import fr.ul.miage.ikram.projet.service.FeesService;
 import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class FeesController {
     private final FeesService feesService;
 
-    public FeesController() {
+    public FeesController() throws SQLException {
         this.feesService = new FeesService();
     }
 

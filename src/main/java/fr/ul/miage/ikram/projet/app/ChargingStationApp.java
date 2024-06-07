@@ -9,11 +9,24 @@ import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
 public class ChargingStationApp {
-    private static final UserController userController = new UserController();
-    private static final ChargingStationController chargingStationController = new ChargingStationController();
-    private static final ReservationController reservationController = new ReservationController();
-    private static final BillingController billingController = new BillingController();
-    private static final FeesController feesController = new FeesController();
+
+    private static UserController userController;
+    private static ChargingStationController chargingStationController;
+    private static ReservationController reservationController;
+    private static BillingController billingController;
+    private static FeesController feesController;
+
+    static {
+        try {
+            userController = new UserController();
+            chargingStationController = new ChargingStationController();
+            reservationController = new ReservationController();
+            billingController = new BillingController();
+            feesController = new FeesController();
+        }catch (Exception e){
+            OutputHandler.printError(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         boolean exit = false;

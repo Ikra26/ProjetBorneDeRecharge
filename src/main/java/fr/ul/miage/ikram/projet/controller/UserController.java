@@ -6,13 +6,14 @@ import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.InputValidator;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
     private final UserService userService;
 
-    public UserController() {
+    public UserController() throws SQLException {
         this.userService = new UserService();
     }
 

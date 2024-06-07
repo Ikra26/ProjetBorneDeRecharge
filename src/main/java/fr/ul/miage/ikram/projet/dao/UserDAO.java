@@ -10,9 +10,16 @@ import java.util.List;
 
 public class UserDAO {
     private final LicensePlateDAO licensePlateDAO;
+    private final Connection connection;
 
-    public UserDAO() {
+    public UserDAO() throws SQLException {
         this.licensePlateDAO = new LicensePlateDAO();
+        this.connection = DatabaseConfig.getConnection(true);
+    }
+
+    public UserDAO(Connection connection) throws SQLException {
+        this.licensePlateDAO = new LicensePlateDAO();
+        this.connection = connection;
     }
 
     public void registerUser(User user) throws SQLException {
@@ -37,8 +44,7 @@ public class UserDAO {
     public void createUser(User user) throws SQLException {
         String query = "INSERT INTO users (id, first_name, last_name, address, mobile_number, email, debit_card_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, user.getId());
             preparedStatement.setString(2, user.getFirstName());
@@ -56,8 +62,7 @@ public class UserDAO {
         String query = "SELECT * FROM users WHERE id = ?";
         User user = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, id);
 
@@ -75,8 +80,7 @@ public class UserDAO {
         String query = "SELECT * FROM users WHERE mobile_number = ?";
         User user = null;
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, mobileNumber);
 
@@ -93,8 +97,7 @@ public class UserDAO {
     public boolean existsById(String id) throws SQLException {
         String query = "SELECT COUNT(*) FROM users WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, id);
 
@@ -111,8 +114,7 @@ public class UserDAO {
         String query = "SELECT * FROM users";
         List<User> users = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
@@ -127,8 +129,7 @@ public class UserDAO {
     public void updateUser(User user) throws SQLException {
         String query = "UPDATE users SET first_name = ?, last_name = ?, address = ?, mobile_number = ?, email = ?, debit_card_number = ? WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
@@ -151,8 +152,7 @@ public class UserDAO {
     public void deleteUser(String id) throws SQLException {
         String query = "DELETE FROM users WHERE id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, id);
 

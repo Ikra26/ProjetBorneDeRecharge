@@ -7,10 +7,12 @@ import fr.ul.miage.ikram.projet.util.InputHandler;
 import fr.ul.miage.ikram.projet.util.InputValidator;
 import fr.ul.miage.ikram.projet.util.OutputHandler;
 
+import java.sql.SQLException;
+
 public class ChargingStationController {
     private final ChargingStationService chargingStationService;
 
-    public ChargingStationController() {
+    public ChargingStationController() throws SQLException {
         this.chargingStationService = new ChargingStationService();
     }
 

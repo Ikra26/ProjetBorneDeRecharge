@@ -9,8 +9,12 @@ import java.util.List;
 public class UserService {
     private final UserDAO userDAO;
 
-    public UserService() {
+    public UserService() throws SQLException {
         this.userDAO = new UserDAO();
+    }
+
+    public UserService(UserDAO userDAO) throws SQLException {
+        this.userDAO = userDAO;
     }
 
     public void registerUser(User user) {

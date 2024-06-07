@@ -9,7 +9,7 @@ import java.util.List;
 public class FeesService {
     private final FeesDAO feesDAO;
 
-    public FeesService() {
+    public FeesService() throws SQLException {
         this.feesDAO = new FeesDAO();
     }
 

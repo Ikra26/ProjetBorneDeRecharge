@@ -8,11 +8,20 @@ import java.util.List;
 
 public class LicensePlateDAO {
 
+    private final Connection connection;
+
+    public LicensePlateDAO() throws SQLException {
+        this.connection = DatabaseConfig.getConnection(true);
+    }
+
+    public LicensePlateDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     public void addLicensePlate(String userId, String plateNumber) throws SQLException {
         String query = "INSERT INTO license_plates (user_id, plate_number) VALUES (?, ?)";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userId);
             preparedStatement.setString(2, plateNumber);
@@ -25,8 +34,7 @@ public class LicensePlateDAO {
         String query = "SELECT plate_number FROM license_plates WHERE user_id = ?";
         List<String> licensePlates = new ArrayList<>();
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userId);
 
@@ -43,8 +51,7 @@ public class LicensePlateDAO {
     public void deleteLicensePlate(String userId, String plateNumber) throws SQLException {
         String query = "DELETE FROM license_plates WHERE user_id = ? AND plate_number = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userId);
             preparedStatement.setString(2, plateNumber);
@@ -56,8 +63,7 @@ public class LicensePlateDAO {
     public void deleteLicensePlatesByUserId(String userId) throws SQLException {
         String query = "DELETE FROM license_plates WHERE user_id = ?";
 
-        try (Connection connection = DatabaseConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, userId);
 
