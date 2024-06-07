@@ -21,7 +21,9 @@ public class ChargingStationApp {
             System.out.println("3. Créer une nouvelle borne de recharge");
             System.out.println("4. Planifier une réservation");
             System.out.println("5. Créer une réservation urgente");
-            System.out.println("6. Quitter");
+            System.out.println("6. Marquer l'arrivée");
+            System.out.println("7. Prolonger une réservation");
+            System.out.println("8. Quitter");
             int option = InputHandler.getInt("Veuillez choisir une option : ");
 
             switch (option) {
@@ -41,6 +43,12 @@ public class ChargingStationApp {
                     reservationController.createUrgentReservation();
                     break;
                 case 6:
+                    reservationController.markArrival();
+                    break;
+                case 7:
+                    reservationController.extendReservation();
+                    break;
+                case 8:
                     exit = true;
                     OutputHandler.printInfo("Fermeture du système...");
                     break;

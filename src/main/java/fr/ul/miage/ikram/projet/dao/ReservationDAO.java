@@ -10,7 +10,7 @@ import java.util.List;
 public class ReservationDAO {
 
     public void createReservation(Reservation reservation) throws SQLException {
-        String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO reservations (id, user_id, station_id, plate_number, start_time, end_time, is_guaranteed, is_completed, is_arrived, is_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -23,6 +23,8 @@ public class ReservationDAO {
             preparedStatement.setTimestamp(6, Timestamp.valueOf(reservation.getEndTime()));
             preparedStatement.setBoolean(7, reservation.isGuaranteed());
             preparedStatement.setBoolean(8, reservation.isCompleted());
+            preparedStatement.setBoolean(9, reservation.isArrived());
+            preparedStatement.setBoolean(10, reservation.isPaid());
 
             preparedStatement.executeUpdate();
         }
@@ -50,7 +52,7 @@ public class ReservationDAO {
     }
 
     public void updateReservation(Reservation reservation) throws SQLException {
-        String query = "UPDATE reservations SET user_id = ?, station_id = ?, plate_number = ?, start_time = ?, end_time = ?, is_guaranteed = ?, is_completed = ? WHERE id = ?";
+        String query = "UPDATE reservations SET user_id = ?, station_id = ?, plate_number = ?, start_time = ?, end_time = ?, is_guaranteed = ?, is_completed = ?, is_arrived = ?, is_paid = ? WHERE id = ?";
 
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -62,7 +64,9 @@ public class ReservationDAO {
             preparedStatement.setTimestamp(5, Timestamp.valueOf(reservation.getEndTime()));
             preparedStatement.setBoolean(6, reservation.isGuaranteed());
             preparedStatement.setBoolean(7, reservation.isCompleted());
-            preparedStatement.setString(8, reservation.getId());
+            preparedStatement.setBoolean(8, reservation.isArrived());
+            preparedStatement.setBoolean(9, reservation.isPaid());
+            preparedStatement.setString(10, reservation.getId());
 
             preparedStatement.executeUpdate();
         }
@@ -108,6 +112,8 @@ public class ReservationDAO {
         reservation.setEndTime(resultSet.getTimestamp("end_time").toLocalDateTime());
         reservation.setGuaranteed(resultSet.getBoolean("is_guaranteed"));
         reservation.setCompleted(resultSet.getBoolean("is_completed"));
+        reservation.setPaid(resultSet.getBoolean("is_paid"));
+        reservation.setArrived(resultSet.getBoolean("is_arrived"));
         return reservation;
     }
 

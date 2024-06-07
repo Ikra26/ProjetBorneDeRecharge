@@ -72,6 +72,8 @@ public class ReservationController {
             reservation.setEndTime(endTime);
             reservation.setGuaranteed(true);
             reservation.setCompleted(false);
+            reservation.setPaid(false);
+            reservation.setArrived(false);
 
             reservationService.createReservation(reservation);
             OutputHandler.printSuccess("Réservation créée avec succès ! Numéro de réservation : " + reservation.getId());
@@ -128,6 +130,8 @@ public class ReservationController {
             reservation.setEndTime(endTime);
             reservation.setGuaranteed(true);
             reservation.setCompleted(false);
+            reservation.setPaid(false);
+            reservation.setArrived(false);
 
             reservationService.createReservation(reservation);
             OutputHandler.printSuccess("Réservation urgente créée avec succès ! Numéro de réservation : " + reservation.getId());
@@ -135,6 +139,61 @@ public class ReservationController {
             OutputHandler.printError("Une erreur s'est produite lors de la création de la réservation urgente : " + e.getMessage());
         }
     }
+
+    public void markArrival() {
+        try {
+            String reservationId = InputHandler.getString("Numéro de réservation : ");
+            Reservation reservation = reservationService.getReservationById(reservationId);
+
+            if (reservation == null) {
+                OutputHandler.printError("Réservation non trouvée.");
+                return;
+            }
+
+            LocalDateTime currentTime = LocalDateTime.now();
+            LocalDateTime startTime = reservation.getStartTime();
+            LocalDateTime endTime = reservation.getEndTime();
+
+            // Vérifier si le client arrive dans les 10 minutes après l'heure de début
+            if (currentTime.isBefore(startTime.plusMinutes(10))) {
+                reservation.setArrived(true);
+                reservationService.updateReservation(reservation);
+                OutputHandler.printSuccess("Arrivée marquée avec succès. Vous pouvez utiliser la borne.");
+            } else {
+                OutputHandler.printError("Vous êtes arrivé au-delà de la période d'attente.");
+            }
+        } catch (Exception e) {
+            OutputHandler.printError("Une erreur s'est produite lors du marquage de l'arrivée : " + e.getMessage());
+        }
+    }
+
+    public void extendReservation() {
+        try {
+            String reservationId = InputHandler.getString("Numéro de réservation : ");
+            Reservation reservation = reservationService.getReservationById(reservationId);
+
+            if (reservation == null) {
+                OutputHandler.printError("Réservation non trouvée.");
+                return;
+            }
+
+            int additionalHours = InputHandler.getInt("Durée supplémentaire en heures : ");
+            LocalDateTime newEndTime = reservation.getEndTime().plusHours(additionalHours);
+
+            List<ChargingStation> availableStations = chargingStationService.getAvailableChargingStations(reservation.getEndTime(), additionalHours);
+            if (availableStations.isEmpty()) {
+                OutputHandler.printError("Aucune borne disponible pour prolonger la réservation.");
+                return;
+            }
+
+            reservation.setEndTime(newEndTime);
+            reservationService.updateReservation(reservation);
+            OutputHandler.printSuccess("Réservation prolongée avec succès.");
+        } catch (Exception e) {
+            OutputHandler.printError("Une erreur s'est produite lors de la prolongation de la réservation : " + e.getMessage());
+        }
+    }
+
 
     private User getUserByIdentifier(String identifier) {
         User user = userService.getUserById(identifier);

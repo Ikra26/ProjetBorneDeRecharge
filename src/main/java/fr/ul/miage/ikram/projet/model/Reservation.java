@@ -11,11 +11,13 @@ public class Reservation {
     private LocalDateTime endTime;
     private boolean isGuaranteed;
     private boolean isCompleted;
+    private boolean isArrived;
+    private boolean isPaid;
 
     // Constructors
     public Reservation() {}
 
-    public Reservation(String id, String userId, int stationId, String licensePlateNumber, LocalDateTime startTime, LocalDateTime endTime, boolean isGuaranteed, boolean isCompleted) {
+    public Reservation(String id, String userId, int stationId, String licensePlateNumber, LocalDateTime startTime, LocalDateTime endTime, boolean isGuaranteed, boolean isCompleted, boolean isArrived, boolean isPaid) {
         this.id = id;
         this.userId = userId;
         this.stationId = stationId;
@@ -24,6 +26,8 @@ public class Reservation {
         this.endTime = endTime;
         this.isGuaranteed = isGuaranteed;
         this.isCompleted = isCompleted;
+        this.isArrived = isArrived;
+        this.isPaid = isPaid;
     }
 
     // Getters and Setters
@@ -91,6 +95,22 @@ public class Reservation {
         this.isCompleted = isCompleted;
     }
 
+    public void setArrived(boolean arrived) {
+        isArrived = arrived;
+    }
+
+    public boolean isArrived() {
+        return isArrived;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
     // toString method
     @Override
     public String toString() {
@@ -103,6 +123,8 @@ public class Reservation {
                 ", endTime=" + endTime +
                 ", isGuaranteed=" + isGuaranteed +
                 ", isCompleted=" + isCompleted +
+                ", isArrived=" + isArrived +
+                ", isPaid=" + isPaid +
                 '}';
     }
 }
